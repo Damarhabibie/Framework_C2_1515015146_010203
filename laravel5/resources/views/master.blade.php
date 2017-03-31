@@ -92,8 +92,8 @@
 
             <div class="container">
                 <div class="content">
-                    <div class="title">Damar Sanggara Habibie<br>
-                    1515015146</div>
+                    <div class="title" style="color: green">Selamat Datang di Praktikum Pemrograman Framework<br>
+                    Damar Sanggara Habibie 1515015146</div>
                     </div>
                 </div>
             <div>

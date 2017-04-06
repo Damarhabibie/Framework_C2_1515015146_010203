@@ -12,7 +12,7 @@ class Dosen extends Model
 
     public function Pengguna()
     {
-    	return $this->belongsTo(Pengguna::class);
+    	return $this->belongsTo(Pengguna::class);// relasi one to one
     }
     public function getUsernameAttribute(){
         return $this->pengguna->username;
@@ -21,9 +21,9 @@ class Dosen extends Model
 
     public function dosen_matakuliah()
     {
-    	return $this->hasMany(Dosen_Matakuliah::class);
+    	return $this->hasMany(Dosen_Matakuliah::class);// relasi many to one
     }
-    public function listDosenDanNim(){
+    public function listDosenDanNip(){
         $out = [];
         foreach ($this->all() as $dsn) {
             $out[$dsn->id] = "{$dsn->nama} ({$dsn->nip})";

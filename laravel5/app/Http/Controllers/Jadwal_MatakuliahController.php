@@ -29,9 +29,9 @@ class Jadwal_MatakuliahController extends Controller
         // return $this->simpan();
     }
 
-    public function simpan(Requests $input)
+    public function simpan(Request $input)
     {
-        $jadwal_matakuliah = new Jadwal_Matakuliah($input->only('ruangan_id','dosen_matakuliah_id','   mahasiswa_id'));
+        $jadwal_matakuliah = new Jadwal_Matakuliah($input->only('ruangan_id','dosen_matakuliah_id','mahasiswa_id'));
             if($jadwal_matakuliah->save()) $this->informasi = "Jadwal Mahasiswa berhasil disimpan";
             return redirect('jadwal_matakuliah')->with(['informasi'=>$this->informasi]);
 
@@ -56,15 +56,16 @@ class Jadwal_MatakuliahController extends Controller
     public function update($id,Request $input)
     {
         $jadwal_matakuliah = Jadwal_Matakuliah::find($id);
-        $jadwal_matakuliah->fill($input->only('ruangan_id','dosen_matakuliah_id','mahasiswa_id'));
-        if($jadwal_matakuliah->save()) $this->informasi = "Jadwal Mahasiswa berhasil diperbarui";
-        return redirect('jadwal_matakuliah')->with(['informasi'=>$this->informasi]);
+        $jadwal_matakuliah ->ruangan_id = $input->ruangan_id;
+        $jadwal_matakuliah ->dosen_matakuliah_id = $input->dosen_matakuliah_id;
+        $jadwal_matakuliah ->mahasiswa_id = $input ->mahasiswa_id;
+        $informasi = $jadwal_matakuliah->save() ? 'Berhasil hapus data' : 'Gagal hapus data';
+        return redirect('jadwal_matakuliah')->with(['informasi'=>$informasi]);
     }
     public function hapus($id,Request $input)
     {
         $jadwal_matakuliah = Jadwal_Matakuliah::find($id);
-        if($jadwal_matakuliah->delete()) $this->informasi = "Jadwal Mahasiswa berhasil dihapus";
-        // $informasi = $mahasiswa->delete() ? 'Berhasil hapus data' : 'Gagal hapus data';
-        return redirect('jadwal_matakuliah')-> with(['informasi'=>$this->informasi]);
+        $informasi = $jadwal_matakuliah->delete() ? 'Berhasil hapus data' : 'Gagal hapus data';
+        return redirect('jadwal_matakuliah')-> with(['informasi'=>$informasi]);
     }
 }

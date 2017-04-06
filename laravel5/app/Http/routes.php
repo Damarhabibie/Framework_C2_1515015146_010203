@@ -90,7 +90,7 @@ Route::get('/', function () {
 }); 
 
 Route::get('/public', function () {
-    return ("Nama Saya : R.H. Kimebmen Simbolon");
+    return ("Nama Saya : Damar S Habibie");
 });
 Route::get('pengguna/{pengguna}', function ($pengguna) {
     return ("Hallo World dari pengguna $pengguna");

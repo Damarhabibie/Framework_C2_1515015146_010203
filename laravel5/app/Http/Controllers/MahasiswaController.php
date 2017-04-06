@@ -84,10 +84,11 @@ class MahasiswaController extends Controller
     public function update($id, Request $input)
     {
         $mahasiswa = Mahasiswa::find($id);
+        $pengguna = $mahasiswa->pengguna;
         $mahasiswa->nama = $input->nama;
         $mahasiswa->nim = $input->nim;
         $mahasiswa->alamat = $input->alamat;
-        $mahasiswa->pengguna_id = $input->pengguna_id;
+        $mahasiswa->save();
         if(!is_null($input->username)){
             $pengguna = $mahasiswa->pengguna->fill($input->only('username'));
                 if(!empty($input->password)) $pengguna->password = $input->password;
@@ -109,5 +110,3 @@ class MahasiswaController extends Controller
         return redirect('mahasiswa')-> with(['informasi'=>$this->informasi]);
     }
 }
-
-

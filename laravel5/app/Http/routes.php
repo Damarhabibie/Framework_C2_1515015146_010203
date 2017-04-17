@@ -82,6 +82,35 @@ Route::post('jadwal_matakuliah/edit/{jadwal_matakuliah}','Jadwal_MatakuliahContr
 Route::get('jadwal_matakuliah/hapus/{jadwal_matakuliah}','Jadwal_MatakuliahController@hapus');
 Route::get('jadwal_matakuliah/lihat/{jadwal_matakuliah}','Jadwal_MatakuliahController@lihat');
 
+
+Route::get('ujiHas','RelationshipRebornController@ujiHas');
+
+Route::get('ujiDoesntHave','RelationshipRebornController@ujiDoesntHave');
+
+Route::get('/',function()
+{
+	return \App\DosenMatakuliah::whereHas('dosen',function($query)
+	{
+		$query->where('nama','like','%s%');
+	})->with('dosen')->groupBy('dosen_id')->get();
+});
+
+Route::get('/',function()
+{
+	return \App\DosenMatakuliah::whereHas('dosen',function($query)
+	{
+		$query->where('nama','like','%s%');
+	})
+	->orWhereHas('matakuliah',function($kueri)
+	{
+		$kueri->where('title','like','%a%');
+	})
+	->with('dosen','matakuliah')
+	->groupBy('dosen_id')
+	->get();
+});
+
+
 // Route::get('/', function () {
 //     return view('posttest1');
 // });

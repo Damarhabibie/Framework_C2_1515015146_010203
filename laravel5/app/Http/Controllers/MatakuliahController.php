@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\MatakuliahRequest;
 use App\Matakuliah;
 
 class MatakuliahController extends Controller
@@ -21,8 +22,12 @@ class MatakuliahController extends Controller
         return view('matakuliah.tambah');
     }
 
-    public function simpan(Request $input)
+    public function simpan(MatakuliahRequest $input)
     {
+        $this->validate($input,[
+                'matakuliah'=>'required',
+                'keterangan'=>'required',
+            ]);
         // $matakuliah = new Matakuliah();
         // $matakuliah -> title = 'Pemrograman Framework';
         // $matakuliah -> keterangan = 'Mata Kuliah Wajib';
@@ -45,7 +50,7 @@ class MatakuliahController extends Controller
         $matakuliah = Matakuliah::find($id);
         return view('matakuliah.lihat')->with(array('matakuliah'=>$matakuliah));
     }
-    public function update($id, Request $input)
+    public function update($id, MatakuliahRequest $input)
     {
         $matakuliah = Matakuliah::find($id);
         $matakuliah -> title = $input->title;

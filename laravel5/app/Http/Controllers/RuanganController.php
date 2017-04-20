@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\RuanganRequest;
 use App\Ruangan;
 
 class RuanganController extends Controller
@@ -21,8 +22,11 @@ class RuanganController extends Controller
         return view('ruangan.tambah') ;
     }
 
-    public function simpan(Request $input)
+    public function simpan(RuanganRequest $input)
     {
+        $this->validate($input,[
+                'ruangan'=>'required',
+            ]);
         // $ruang = new Ruangan();
         // $ruang -> title = 'Lab BP';
         // $ruang->save();
@@ -44,7 +48,7 @@ class RuanganController extends Controller
         $ruangan = Ruangan::find($id);
         return view('ruangan.lihat')->with(array('ruangan'=>$ruangan));
     }
-    public function update($id, Request $input)
+    public function update($id, RuanganRequest $input)
     {
         $ruangan = Ruangan::find($id);
         $ruangan -> title = $input->title;

@@ -87,12 +87,23 @@
                     {{Session::get('informasi')}}
                 </div>
             @endif
+
+            @if(count($errors)>0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
             @yield('container')
             </div>
 
             <div class="container">
                 <div class="content">
-                    <div class="title" style="color: green">Selamat Datang di Praktikum Pemrograman Framework<br>
+                    <div class="title" style="color: black"><br>
                     Damar Sanggara Habibie 1515015146</div>
                     </div>
                 </div>

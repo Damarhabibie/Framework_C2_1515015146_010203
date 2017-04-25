@@ -52,7 +52,8 @@
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
                             <li><a href="{{url('mahasiswa')}}">Data Mahasiswa</a></li>
                             <li class="divider"></li>
-                            <li><a href="{{url('jadwal_matakuliah')}}">Jadwal Mahasiswa</a></li>                            
+                            <li><a href="{{url('jadwal_matakuliah')}}">Jadwal Mahasiswa</a></li>
+
                         </ul>
                     </li>
                     <li class="dropdown active">
@@ -71,8 +72,10 @@
                             <li class="divider"></li>
                             <li><a href="{{ url('ruangan') }}">Ruangan</a></li>
                             <li class="divider"></li>
-                            <li><a href="{{ url('matakuliah') }}">Matakuliah</a></li>                           
-                        </ul>
+                            <li><a href="{{ url('matakuliah') }}">Matakuliah</a></li>
+
+                            </ul>
+                            <li><a href="{{ url('logout')}}">Logout</a></li>
                     </li>
                 </ul>
                 </div><!--/.nav collapse-->

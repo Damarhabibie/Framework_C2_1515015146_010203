@@ -1,7 +1,6 @@
 <?php namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Request\PenggunaRequest;
 use App\Http\Requests;
 use App\Pengguna;
 
@@ -19,19 +18,20 @@ class PenggunaController extends Controller
         return view('pengguna.tambah');
     }
 
-    public function simpan(PenggunaRequest $input)
+    public function simpan(Request $input)
     {
-        $this->validate($input,[
-                'username'=>'required',
-                'password'=>'required',
-            ]);
         // $pengguna = new Pengguna();
      //    $pengguna -> username = 'damar';
-     //    $pengguna -> password = 'batuakik';
+     //    $pengguna -> password = '12345678';
      //    $informasi = $pengguna->save()? 'Berhasil simpan data': 'Gagal simpan data';
      //    return redirect ('pengguna')->with(['informasi'=>$informasi]);
      //    $pengguna->save();
         // return "Data dengan username {$pengguna->username} Telah Disimpan";
+        $this->validate($input,[
+                'username'=>'required',
+                'password'=>'required',
+            ]) ;
+        
         $pengguna = new Pengguna;
         $pengguna->username = $input->username;
         $pengguna->password = $input->password;;
@@ -50,7 +50,7 @@ class PenggunaController extends Controller
         return view('pengguna.lihat')->with(array('pengguna'=>$pengguna));
     }
 
-    public function update($id, PenggunaRequest $input)
+    public function update($id, Request $input)
     {
         $pengguna = Pengguna::find($id);
         $pengguna -> username = $input->username;

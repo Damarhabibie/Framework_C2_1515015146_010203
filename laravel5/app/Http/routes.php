@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -10,6 +11,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/login','SesiController@form');
+Route::post('/login','SesiController@validasi');
+Route::get('/logout','SesiController@logout');
+Route::get('/','SesiController@index');
 
 Route::get('pengguna','PenggunaController@awal');
 Route::get('pengguna/tambah','PenggunaController@tambah');
@@ -87,60 +92,60 @@ Route::get('ujiHas','RelationshipRebornController@ujiHas');
 
 Route::get('ujiDoesntHave','RelationshipRebornController@ujiDoesntHave');
 
-Route::get('/',function()
-{
-	return \App\DosenMatakuliah::whereHas('dosen',function($query)
-	{
-		$query->where('nama','like','%s%');
-	})->with('dosen')->groupBy('dosen_id')->get();
-});
+// Route::get('/',function()
+// {
+// 	return \App\DosenMatakuliah::whereHas('dosen',function($query)
+// 	{
+// 		$query->where('nama','like','%s%');
+// 	})->with('dosen')->groupBy('dosen_id')->get();
+// });
 
-Route::get('/',function()
-{
-	return \App\DosenMatakuliah::whereHas('dosen',function($query)
-	{
-		$query->where('nama','like','%s%');
-	})
-	->orWhereHas('matakuliah',function($kueri)
-	{
-		$kueri->where('title','like','%a%');
-	})
-	->with('dosen','matakuliah')
-	->groupBy('dosen_id')
-	->get();
-});
+// Route::get('/',function()
+// {
+// 	return \App\DosenMatakuliah::whereHas('dosen',function($query)
+// 	{
+// 		$query->where('nama','like','%s%');
+// 	})
+// 	->orWhereHas('matakuliah',function($kueri)
+// 	{
+// 		$kueri->where('title','like','%a%');
+// 	})
+// 	->with('dosen','matakuliah')
+// 	->groupBy('dosen_id')
+// 	->get();
+// });
 
 
 // Route::get('/', function () {
 //     return view('posttest1');
 // });
-Route::get('/', function () {
-    return view('master');
-}); 
+// Route::get('/', function () {
+//     return view('master');
+// }); 
 
-Route::get('/public', function () {
-    return ("Nama Saya : Damar S Habibie");
-});
-Route::get('pengguna/{pengguna}', function ($pengguna) {
-    return ("Hallo World dari pengguna $pengguna");
-});
+// Route::get('/public', function () {
+//     return ("Nama Saya : Damar S Habibie");
+// });
+// Route::get('pengguna/{pengguna}', function ($pengguna) {
+//     return ("Hallo World dari pengguna $pengguna");
+// });
 
-Route::get('/',function(Illuminate\Http\Request $request)
-{
-	echo "ini adalah request dari method get ". $request->nama;
-}); 
+// Route::get('/',function(Illuminate\Http\Request $request)
+// {
+// 	echo "ini adalah request dari method get ". $request->nama;
+// }); 
 
-use Illuminate\Http\Request;
-Route::get('/',function()
-{
-	echo Form::open(['url'=>'/']).
-		 Form::label('nama').
-		 Form::text('nama',null).
-		 Form::submit('kirim').
-		 Form::close();
-});
-Route::post('/',function (Request $request)
-{
-	echo "Hasil dari form input tadi nama : ".$request->nama;
-});
+
+// Route::get('/',function()
+// {
+// 	echo Form::open(['url'=>'/']).
+// 		 Form::label('nama').
+// 		 Form::text('nama',null).
+// 		 Form::submit('kirim').
+// 		 Form::close();
+// });
+// Route::post('/',function (Request $request)
+// {
+// 	echo "Hasil dari form input tadi nama : ".$request->nama;
+// });
 
